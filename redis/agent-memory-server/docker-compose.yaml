@@ -70,7 +70,6 @@ services:
         required: true
     environment:
       - REDIS_URL=redis://redis:6379
-      - PORT=8000
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - GENERATION_MODEL=gpt-5.2-chat-latest
       - FAST_MODEL=gpt-5-mini
@@ -82,6 +81,7 @@ services:
       - DISABLE_AUTH=true
     depends_on:
       - redis
+      - api
     command: ["agent-memory", "task-worker"]
     restart: unless-stopped
     networks:
