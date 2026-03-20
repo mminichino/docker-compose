@@ -32,7 +32,7 @@ services:
 
   api:
     profiles: ["standard", ""]
-    image: agent-memory-server:latest
+    image: redislabs/agent-memory-server:latest
     container_name: agent-memory-server
     ports:
       - "8000:8000"
@@ -47,9 +47,9 @@ services:
       - FAST_MODEL=gpt-5-mini
       - SLOW_MODEL=gpt-5.2-chat-latest
       - EMBEDDING_MODEL=text-embedding-3-small
-      - LONG_TERM_MEMORY=True
-      - ENABLE_TOPIC_EXTRACTION=True
-      - ENABLE_NER=True
+      - LONG_TERM_MEMORY=true
+      - ENABLE_TOPIC_EXTRACTION=true
+      - ENABLE_NER=true
       - DISABLE_AUTH=true
     depends_on:
       - redis
@@ -63,7 +63,7 @@ services:
 
   task-worker:
     profiles: ["standard", ""]
-    image: agent-memory-server:latest
+    image: redislabs/agent-memory-server:latest
     container_name: agent-memory-worker
     env_file:
       - path: .env
@@ -75,9 +75,9 @@ services:
       - FAST_MODEL=gpt-5-mini
       - SLOW_MODEL=gpt-5.2-chat-latest
       - EMBEDDING_MODEL=text-embedding-3-small
-      - LONG_TERM_MEMORY=True
-      - ENABLE_TOPIC_EXTRACTION=True
-      - ENABLE_NER=True
+      - LONG_TERM_MEMORY=true
+      - ENABLE_TOPIC_EXTRACTION=true
+      - ENABLE_NER=true
       - DISABLE_AUTH=true
     depends_on:
       - redis
