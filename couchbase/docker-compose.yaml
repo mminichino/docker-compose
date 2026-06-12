@@ -1,0 +1,26 @@
+networks:
+  couchbase_dev_network:
+    driver: bridge
+    name: couchbase-dev-network
+
+volumes:
+  couchbase_dev_data:
+    driver: local
+    name: couchbase-dev-data-volume
+
+services:
+  couchbase:
+    image: couchbase/server:enterprise-8.0.1
+    container_name: couchbase-dev
+    ports:
+      - "8091-8096:8091-8096"
+      - "9123:9123"
+      - "11207:11207"
+      - "11210:11210"
+      - "11280:11280"
+      - "18091-18097:18091-18097"
+    volumes:
+      - couchbase_dev_data:/opt/couchbase/var
+    networks:
+      - couchbase_dev_network
+    restart: unless-stopped
