@@ -9,8 +9,23 @@ volumes:
     name: couchbase-dev-data-volume
 
 services:
+  bootstrap:
+    image: mminichino/cbsbootstrap:0.4.0
+    environment:
+      - CBS_NODES=127.0.0.1
+      - CBS_ALTERNATE_ADDRESS=couchbase-dev
+      - CBS_BUCKET=data
+      - CBS_SCOPE=data
+      - CBS_COLLECTION=data
+    networks:
+      - couchbase_dev_network
+    depends_on:
+      couchbase:
+        condition: service_started
+    restart: no
+
   couchbase:
-    image: couchbase/server:enterprise-8.0.1
+    image: couchbase/server:enterprise-8.0.2
     container_name: couchbase-dev
     ports:
       - "8091-8096:8091-8096"
